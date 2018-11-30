@@ -19,11 +19,11 @@ describe('case 1', function(){
     ruleResultsOverrides[rule15.ruleId()] = "fizzbuzz";
 
     it('should call rules runner with correct params', function(){
-        index.case1(numbers);
+        index.case1(numbers, runnerSpy);
         assert(runnerSpy.called);
         const args = runnerSpy.getCall(0).args;
         assert.deepEqual(args[0], numbers);
-        assert.deepEqual(args[1], rules);
+        assert.deepEqual(args[1], [rule3, rule5, rule15]);
         assert.deepEqual(args[2], ruleResultsOverrides);
     });
 });
