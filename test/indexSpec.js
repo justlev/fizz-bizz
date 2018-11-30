@@ -21,12 +21,13 @@ describe('index', function(){
         ruleResultsOverrides[rule5.ruleId()] = "buzz";
         ruleResultsOverrides[rule15.ruleId()] = "fizzbuzz";
         it('should call rules runner with correct params', function(){
-            index.case1(numbers, runnerSpy);
+            const result = index.case1(numbers, runnerSpy);
             assert(runnerSpy.called);
             const args = runnerSpy.getCall(0).args;
             assert.deepEqual(args[0], numbers);
             assert.deepEqual(args[1], [rule3, rule5, rule15]);
             assert.deepEqual(args[2], ruleResultsOverrides);
+            assert.deepEqual(result.output, [ 'fizzbuzz',1,2,'fizz',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz',13,14,'fizzbuzz',16,17,'fizz',19,'buzz' ]);
         });
     });
 
@@ -38,12 +39,32 @@ describe('index', function(){
         ruleResultsOverrides[rule15.ruleId()] = "fizzbuzz";
         ruleResultsOverrides[stringContains3Rule.ruleId()] = "lucky";
         it('should call rules runner with correct params', function(){
-            index.case2(numbers, runnerSpy);
+            const result = index.case2(numbers, runnerSpy);
             assert(runnerSpy.called);
             const args = runnerSpy.getCall(0).args;
             assert.deepEqual(args[0], numbers);
             assert.deepEqual(args[1], [rule3, rule5, rule15, stringContains3Rule]);
             assert.deepEqual(args[2], ruleResultsOverrides);
+            assert.deepEqual(result.output, [ 'fizzbuzz',1,2,'lucky',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz','lucky',14,'fizzbuzz',16,17,'fizz',19,'buzz' ]);
+        });
+    });
+
+    describe('case3', function(){
+        const runnerSpy = sinon.spy(rulesRunner);
+        const ruleResultsOverrides = {};
+        ruleResultsOverrides[rule3.ruleId()] = "fizz";
+        ruleResultsOverrides[rule5.ruleId()] = "buzz";
+        ruleResultsOverrides[rule15.ruleId()] = "fizzbuzz";
+        ruleResultsOverrides[stringContains3Rule.ruleId()] = "lucky";
+        it('should call rules runner with correct params', function(){
+            const result = index.case3(numbers, runnerSpy);
+            assert(runnerSpy.called);
+            const args = runnerSpy.getCall(0).args;
+            assert.deepEqual(args[0], numbers);
+            assert.deepEqual(args[1], [rule3, rule5, rule15, stringContains3Rule]);
+            assert.deepEqual(args[2], ruleResultsOverrides);
+            assert.deepEqual(result.output, [ 'fizzbuzz',1,2,'lucky',4,'buzz','fizz',7,8,'fizz','buzz',11,'fizz','lucky',14,'fizzbuzz',16,17,'fizz',19,'buzz' ]);
+            assert.deepEqual(result.stats, { fizzbuzz: 2, integer: 10, lucky: 2, buzz: 3, fizz: 4 });
         });
     });
 });
