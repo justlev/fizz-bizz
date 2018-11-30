@@ -1,4 +1,4 @@
-const BaseMultiplicationRule = require('../../rules/baseMultiplicationRule');
+const BaseMultiplicationRule = require('../rules/baseMultiplicationRule');
 function fizzBuzz1(numbersArrayToRunOn, rulesToInvoke){
     numbersArrayToRunOn.forEach(number => {
         rulesToInvoke.forEach(rule => {

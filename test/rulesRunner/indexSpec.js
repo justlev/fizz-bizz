@@ -1,9 +1,9 @@
 process.env.NODE_ENV = 'test';
 
 const assert = require('assert');
-const numbersHelper = require('../../helpers/numbers');
-const fizzBuzz1 = require('../../../scenes/fizzBuzz1');
-const BaseMultiplicationRule = require('../../../rules/baseMultiplicationRule');
+const numbersHelper = require('../helpers/numbers');
+const fizzBuzz1 = require('../../rulesRunner');
+const BaseMultiplicationRule = require('../../rules/baseMultiplicationRule');
 const sinon = require('sinon');
 
 
