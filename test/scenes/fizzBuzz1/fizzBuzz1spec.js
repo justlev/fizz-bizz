@@ -1,8 +1,11 @@
+process.env.NODE_ENV = 'test';
+
 const assert = require('assert');
 const numbersHelper = require('../../helpers/numbers');
 const fizzBuzz1 = require('../../../scenes/fizzBuzz1');
 const BaseMultiplicationRule = require('../../../rules/baseMultiplicationRule');
 const sinon = require('sinon');
+
 
 describe('#fizzBuzz1', function(){
     const numbersToRunOn = numbersHelper.getArrayRange(1, 20);
