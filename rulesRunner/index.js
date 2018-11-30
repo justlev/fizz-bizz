@@ -1,5 +1,6 @@
 function rulesRunner(numbersArrayToRunOn, rulesToInvoke, rulesToResults={}){
-    const outputs = [];
+    const output = [];
+    const stats = {};
     numbersArrayToRunOn.forEach(number => {
         let matchingRule = null;
         rulesToInvoke.forEach(rule => {
@@ -8,12 +9,16 @@ function rulesRunner(numbersArrayToRunOn, rulesToInvoke, rulesToResults={}){
         });
         const roundOutput = matchingRule == null || rulesToResults[matchingRule.ruleId()] == null ?
                             number : rulesToResults[matchingRule.ruleId()];
-        outputs.push(roundOutput);
-        if (process.env.NODE_ENV !== 'test'){
-            console.log(roundOutput);
-        }
+        output.push(roundOutput);
+        addStat(roundOutput, stats);
     });
-    return outputs;
+    return {output: output, stats: stats};
+}
+
+function addStat(result, stats){
+    const resultToUse = Number.isInteger(result) ? 'integer' : result;
+    if (stats[resultToUse] == null) stats[resultToUse] = 0;
+    stats[resultToUse]+=1;
 }
 
 module.exports = rulesRunner;
