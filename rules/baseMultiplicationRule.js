@@ -1,5 +1,4 @@
 class BaseMultiplicationRule{
-
     constructor(number, replaceWith){
         this.multiplicator = number;
         this.replaceWith = replaceWith;

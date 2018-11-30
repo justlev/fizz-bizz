@@ -1,6 +1,6 @@
 const assert = require('assert');
 const numbersHelper = require('../helpers/numbers');
-const BaseMultiplicationRule = require('../../rules/base_multiplication_rule');
+const BaseMultiplicationRule = require('../../rules/baseMultiplicationRule');
 
 describe('BaseMultiplicationRule', function(){
     const testsHash = {
