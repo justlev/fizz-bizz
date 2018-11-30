@@ -1,13 +1,19 @@
-const BaseMultiplicationRule = require('../rules/baseMultiplicationRule');
-function fizzBuzz1(numbersArrayToRunOn, rulesToInvoke){
+function rulesRunner(numbersArrayToRunOn, rulesToInvoke, rulesToResults={}){
+    const outputs = [];
     numbersArrayToRunOn.forEach(number => {
+        let matchingRule = null;
         rulesToInvoke.forEach(rule => {
-            const result = rule.getValueForNumber(number);
-            if (process.env.NODE_ENV !== 'test') {
-                console.log(result);
-            }
+            const ruleApplies = rule.ruleApplies(number);
+            if (ruleApplies) matchingRule = rule;
         });
+        const roundOutput = matchingRule == null || rulesToResults[matchingRule.ruleId()] == null ?
+                            number : rulesToResults[matchingRule.ruleId()];
+        outputs.push(roundOutput);
+        if (process.env.NODE_ENV !== 'test'){
+            console.log(roundOutput);
+        }
     });
+    return outputs;
 }
 
-module.exports = fizzBuzz1;
+module.exports = rulesRunner;

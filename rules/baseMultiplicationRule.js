@@ -1,14 +1,18 @@
 class BaseMultiplicationRule{
-    constructor(number, replaceWith){
+    constructor(number){
         this.multiplicator = number;
-        this.replaceWith = replaceWith;
+        this.RULE_ID = "MULTIPLICATION_RULE_"+number;
     }
 
-    getValueForNumber(number){
+    ruleApplies(number){
         if (number%this.multiplicator == 0){
-            return this.replaceWith;
+            return true;
         }
-        return number;
+        return false;
+    }
+
+    ruleId(){
+        return this.RULE_ID;
     }
 }
 
